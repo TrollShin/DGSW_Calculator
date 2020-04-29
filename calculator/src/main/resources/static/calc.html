@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <input id="num1">
+    <input id="num2">
+    <select id="operator">
+        <option value="add">+</option>
+        <option value="sub">-</option>
+        <option value="mul">x</option>
+        <option value="div">/</option>
+    </select>
+    <button onclick="clicked()">calculate</button>
+    <div id="response"> 결과 </div>
+
+    <script>
+        async function clicked() 
+        {
+            let num1 = $("#num1").val().trim();
+            let num2 = $("#num2").val().trim();
+            let operator = $("#operator").val().trim();
+
+            let response = await $.get("/calculator/" + num1 + "/" + num2 + "/" + operator);
+            $("#response").html(JSON.stringify(response));
+        }
+    </script>
+</body>
+</html>
